@@ -2,6 +2,8 @@ import React from 'react';
 import './style.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import user from '../services/user/user';
+import { Redirect } from 'react-router-dom';
 // import userService from '../../services/user'
 // import { Redirect } from 'react-router-dom';
 
@@ -10,14 +12,14 @@ const NormalLoginForm = () => {
 
   const onFinish = values => {
     console.log('Received values of form: ', values);
-    /*userService.authenticate(() => {
+    user.authenticate(values, (success) => {
+      console.log({success})
       setRedirectToReferrer(true)
-      console.log("authenticated ...")
-    })*/
+    })
   };
 
   if (redirectToReferrer) {
-    //return <Redirect to="/" />
+    return <Redirect to="/" />
   }
 
   return (

@@ -6,6 +6,7 @@ import NormalLoginForm from './containers/LoginContainer/LoginContainer';
 import MainConatier from './containers/MainContainer/MainContainer';
 
 import { BrowserRouter , Switch, Route, Link} from "react-router-dom"
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const { Header } = Layout;
 
@@ -31,9 +32,9 @@ const App = () => {
         <Route path="/login">
           <NormalLoginForm />
         </Route>
-        <Route path="/second">
+        <ProtectedRoute path="/second">
           <SecondContainer />
-        </Route>
+        </ProtectedRoute>
         <Route path="/">
           <MainConatier />
         </Route>
