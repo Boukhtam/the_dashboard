@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Layout, Menu } from 'antd';
 
-function App() {
+import SecondContainer from './containers/SecondContainer/SecondContainer';
+import NormalLoginForm from './containers/LoginContainer/LoginContainer';
+import MainConatier from './containers/MainContainer/MainContainer';
+
+import { BrowserRouter , Switch, Route, Link} from "react-router-dom"
+
+const { Header } = Layout;
+
+const items1 = ['home', 'login', 'second'].map((key) => ({
+  key,
+  label: <Link to={`/${key}`}>{key}</Link>,
+}));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <BrowserRouter>
+    <Layout>
+      <Header className="header">
+        <div className="logo" />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']} items={items1}>
+          <Menu.Item>
+            Hello ...
+          </Menu.Item>
+        </Menu>
+      </Header>
 
+      <Switch>
+        <Route path="/login">
+          <NormalLoginForm />
+        </Route>
+        <Route path="/second">
+          <SecondContainer />
+        </Route>
+        <Route path="/">
+          <MainConatier />
+        </Route>
+      </Switch>
+
+    </Layout>
+    </BrowserRouter>
+  );
+};
 export default App;
