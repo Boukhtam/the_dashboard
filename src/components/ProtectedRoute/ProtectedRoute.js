@@ -1,9 +1,9 @@
 import { Redirect, Route } from "react-router-dom";
-
+import user from "../../services/user/user";
 function ProtectedRoute(props) { 
-  var isLoggedin = false
+  console.log("From the protected route ....", {user})
 
-  if (!isLoggedin)
+  if (!user.loggedIn)
     return <Redirect to="/login" />
 
   return <Route {...props}>{props.children}</Route>

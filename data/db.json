@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "username": "username", "password": "password", "token": "username_token"},
+    { "username": "user", "password": "password", "token": "username_token"},
+    { "username": "name", "password": "password", "token": "username_token"}
+  ]
+}

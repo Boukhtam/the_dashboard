@@ -2,23 +2,35 @@ import React from 'react';
 import './style.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import user from '../services/user/user';
+import user from '../../services/user/user';
 import { Redirect } from 'react-router-dom';
-// import userService from '../../services/user'
-// import { Redirect } from 'react-router-dom';
+import { Context } from '../contexts/AuthContext';
+
+const {Item} = Form
 
 const NormalLoginForm = () => {
-  const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
+  const [shouldRedirect, setSouldRedirect] = React.useState()
+  //const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
+
+  const context = React.useContext(Context)
+
+  console.log(context)
 
   const onFinish = values => {
-    console.log('Received values of form: ', values);
-    user.authenticate(values, (success) => {
-      console.log({success})
-      setRedirectToReferrer(true)
-    })
+    //console.log('Received values of form: ', values);
+    function callback(data, error) { 
+      if (data) {
+        context.setUserData(data.user, data.tokens.token)
+        setSouldRedirect(true)
+      } else if (error) {
+        // Handle the error!
+      }
+     }
+
+    user.authenticate(values, callback)
   };
 
-  if (redirectToReferrer) {
+  if (shouldRedirect) {
     return <Redirect to="/" />
   }
 
